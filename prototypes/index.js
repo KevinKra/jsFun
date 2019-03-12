@@ -19,26 +19,32 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 // =================================================================
 
 // DATASET: kitties from ./datasets/kitties
-const kittyPrompts = {
+var kittyPrompts = {
   orangeKittyNames() {
-    // Return an array of just the names of kitties who are orange e.g.
-    // ['Tiger', 'Snickers']
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.filter( function(kitten) {
+      return kitten.color === 'orange';
+    }).map( function(cat) {
+        return cat.name;
+    });
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.slice().map( function(kitten) {
+        return kitten;
+    }).sort( function(a,b) {
+        return b.age - a.age;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Slice is not needed here since we are using map to project an array from the source.
+    // However, sort converts IN PLACE so it would have safeguarded against that issue were it one.
+    // We map through every element of the source array and return it out following the mutation
+    // provided by sort method that sorts each element based on their respective age property's values.
   },
 
   growUp() {
